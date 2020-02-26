@@ -8,12 +8,12 @@ import './form-input.styles.scss';
 const FormInput = ({ handleChange, label, ...otherProps }) => (
   <div className='group'>
     <input className='form-input' onChange={handleChange} {...otherProps} />
-    {console.log(
+    {/*console.log(
       otherProps,
       typeof otherProps,
       otherProps.value,
       otherProps.value.length
-    )}
+    )*/}
     {label ? (
       <label
         className={`${
