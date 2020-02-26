@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import './sign-in.styles.scss';
 
@@ -18,11 +18,17 @@ const SignIn = () => {
   const { email, password } = userCredentials;
 
   //methods - setting state is asynchronous but handleSubmit catches the final state of the form
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setCredentials({ email: '', password: '' }); //clear the form
+    } catch (error) {
+      console.log(error);
+    }
+
     //console.log(userCredentials);
-    setCredentials({ email: '', password: '' });
   };
 
   const handleChange = e => {
