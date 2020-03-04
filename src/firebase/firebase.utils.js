@@ -13,7 +13,7 @@ const config = {
   measurementId: 'G-4B5VTMZ67T'
 };
 
-//pass additionalData for the user as an object
+//pass additionalData for the user as an object - additionalData is an object
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 

@@ -35,7 +35,7 @@ const SignUp = () => {
         password
       );
 
-      await createUserProfileDocument(user, { displayName });
+      await createUserProfileDocument(user, { displayName }); //this { displayName } object means { displayName: displayName }
 
       //reset state to clear our form
       setUserInfo({
