@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.css';
@@ -15,6 +15,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    //destructure setCurrentUser from this.props
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -44,16 +45,28 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={SignInAndSignUpPage} />
+          <Route
+            exact
+            path='/signin'
+            render={() => (this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />)}
+          />
         </Switch>
       </div>
     );
   }
 }
+
+//we destrucrure from our state the user reducer
+const mapStateToProps = ({ user }) => ({
+  //new app component prop --> currentUser (the key of the object)
+  //the path here is root-reducer.js --> user.reducer.js
+  currentUser: user.currentUser
+});
+
 //new prop for our component called setCurrentUser (the key inside the returned object)
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 // app component does not need the current user from the state, as the header component
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
