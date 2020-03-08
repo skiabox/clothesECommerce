@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
@@ -24,9 +25,12 @@ const mapDispatchToProps = dispatch => ({
 
 //show the number of items added in the cart
 //we destructure again all the path from root-reducer.js to cart-reducer.js taking the value we want, using nested destructuring
-const mapStateToProps = state => ({
+/* const mapStateToProps = state => ({
   //new prop for our component (itemCount)
   itemCount: selectCartItemsCount(state)
+}); */
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectCartItemsCount
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
