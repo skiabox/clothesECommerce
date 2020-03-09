@@ -16,3 +16,19 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   //this return runs only the first time we add an item to the array
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToRemove.id);
+
+  //if quantity is one we use again the code we used for remove an item from the array of items
+  //filter keeps the values where the function returns true
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+  }
+
+  //if quantity is not one
+  //map every item to itself except for the case where we have the cart item to remove, where we decrease its quantity field by one
+  return cartItems.map(cartItem =>
+    cartItem.id === cartItemToRemove.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+  );
+};
