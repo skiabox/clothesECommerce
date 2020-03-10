@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import SHOP_DATA from './shop.data';
+import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
+import CollectionPage from '../collection/collection.component';
 
-import CollectionPreview from '../../components/collection-preview/collection-preview.component';
-
-const ShopPage = () => {
-  const [collections, setCollections] = useState(SHOP_DATA); //SHOP_DATA is an array of objects
-  //console.log(collections);
-
-  return (
-    <div className='shop-page'>
-      {collections.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview key={id} {...otherCollectionProps} />
-      ))}
-    </div>
-  );
-};
+//destructure the props passed from App.js Route component
+//match.path property here is "/shop"
+//we want to create /shop/:collection
+const ShopPage = ({ match }) => (
+  <div className='shop-page'>
+    <Route exact path={`${match.path}`} component={CollectionsOverview} />
+    <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+  </div>
+);
 
 export default ShopPage;
