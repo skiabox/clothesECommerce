@@ -1,13 +1,14 @@
 import React from 'react';
 
-import './form-input.styles.scss';
+//import './form-input.styles.scss';
+import { GroupContainer, FormInputContainer, FormInputLabel } from './form-input.styles';
 
 // handleChange will bublle up the event (otherProps : name, type, value, required)
 // otherProps.value.length starts with the value of zero (false), when the form first loads itself
 // and it increases as we start typing into the fields
 const FormInput = ({ handleChange, label, ...otherProps }) => (
-  <div className='group'>
-    <input className='form-input' onChange={handleChange} {...otherProps} />
+  <GroupContainer>
+    <FormInputContainer onChange={handleChange} {...otherProps} />
     {/*console.log(
       otherProps,
       typeof otherProps,
@@ -15,15 +16,9 @@ const FormInput = ({ handleChange, label, ...otherProps }) => (
       otherProps.value.length
     )*/}
     {label ? (
-      <label
-        className={`${
-          otherProps.value.length ? 'shrink' : ''
-        } form-input-label`}
-      >
-        {label}
-      </label>
+      <FormInputLabel className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>{label}</FormInputLabel>
     ) : null}
-  </div>
+  </GroupContainer>
 );
 
 export default FormInput;

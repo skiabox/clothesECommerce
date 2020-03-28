@@ -1,0 +1,34 @@
+--> history :
+
+The term “history” and "history object" in this documentation refers to the history package, 
+which is one of only 2 major dependencies of React Router (besides React itself), 
+and which provides several different implementations for managing session history in JavaScript in various environments.
+
+Each router creates a history object that it uses to keep track of the current location and re-renders the application whenever this location changes. 
+For this reason, the other React Router components rely on this history object being present; which is why they need to be rendered inside a router.
+
+-> history objects typically have the following properties and methods:
+
+length - (number) The number of entries in the history stack
+action - (string) The current action (PUSH, REPLACE, or POP)
+
+-> location - (object) The current location. May have the following properties:
+pathname - (string) The path of the URL
+search - (string) The URL query string
+hash - (string) The URL hash fragment
+state - (object) location-specific state that was provided to e.g. push(path, state) when this location was pushed onto the stack. Only available in browser and memory history.
+
+push(path, [state]) - (function) Pushes a new entry onto the history stack
+replace(path, [state]) - (function) Replaces the current entry on the history stack
+go(n) - (function) Moves the pointer in the history stack by n entries
+goBack() - (function) Equivalent to go(-1)
+goForward() - (function) Equivalent to go(1)
+block(prompt) - (function) Prevents navigation (see the history docs)
+----------------------------------------------------------------------
+--> match object
+
+A match object contains information about how a <Route path> matched the URL. match objects contain the following properties:
+params - (object) Key/value pairs parsed from the URL corresponding to the dynamic segments of the path
+isExact - (boolean) true if the entire URL was matched (no trailing characters)
+path - (string) The path pattern used to match. Useful for building nested <Route>s
+url - (string) The matched portion of the URL. Useful for building nested <Link>s

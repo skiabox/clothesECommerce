@@ -5,7 +5,8 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
-import './sign-in.styles.scss';
+//import './sign-in.styles.jsx';
+import { SignInContainer, SignInTitle, ButtonsBarContainer } from './sign-in.styles';
 
 const SignIn = () => {
   const [userCredentials, setCredentials] = useState({
@@ -41,19 +42,12 @@ const SignIn = () => {
   };
 
   return (
-    <div className='sign-in'>
-      <h2>I already have an account</h2>
+    <SignInContainer>
+      <SignInTitle>I already have an account</SignInTitle>
       <span>Sign in with your email and password</span>
 
       <form onSubmit={handleSubmit}>
-        <FormInput
-          name='email'
-          type='email'
-          value={email}
-          label='email'
-          required
-          handleChange={handleChange}
-        />
+        <FormInput name='email' type='email' value={email} label='email' required handleChange={handleChange} />
         <FormInput
           name='password'
           type='password'
@@ -62,15 +56,15 @@ const SignIn = () => {
           required
           handleChange={handleChange}
         />
-        <div className='buttons'>
+        <ButtonsBarContainer>
           {/* type and onClick are passed down to a classic button in custom-button.component.jsx as ...otherProps since they are normal button tag properties */}
           <CustomButton type='submit'>Sign in</CustomButton>
           <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
             Sign in with Google
           </CustomButton>
-        </div>
+        </ButtonsBarContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

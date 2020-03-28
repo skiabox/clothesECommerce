@@ -1,0 +1,4 @@
+Firestore
+---------
+Project name: crwn-db
+Project ID: crwn-db-ae9c6

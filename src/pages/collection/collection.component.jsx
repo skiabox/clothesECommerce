@@ -30,7 +30,7 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 //match.path here is "/shop/:collectionId"
 //match.url here is what we typed "/shop/hats"
 //match.params is an object of this form {collectionId: "hats"}
-//destructure props.collection
+//destructure props.collection object that we get from the newly created prop collection
 const CollectionPage = ({ collection }) => {
   //we destructure collection object to get title and items variables (of string and array type respectively)
   const { title, items } = collection;
